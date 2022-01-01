@@ -1,0 +1,187 @@
+# Blender MTL File: 'Tifa.blend'
+# Material Count: 15
+
+newmtl Pubes
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.021350 0.021350 0.021350
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+
+newmtl Tifa_Accs
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Acc_BaseColor.png
+map_Ns Tifa_Acc_Roughness.png
+map_d Tifa_Acc_BaseColor.png
+refl Tifa_Acc_Metallic.png
+
+newmtl Tifa_Arms
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Arms_BaseColor.png
+map_Ns Tifa_Arms_Roughness.png
+refl Tifa_Arms_Metallic.png
+
+newmtl Tifa_Body
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.588000 0.588000 0.588000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Body_BaseColor.png
+map_Ns Tifa_Body_Roughness.png
+
+newmtl Tifa_Eyelashes
+Ns 85.983473
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Hair_BaseColor.png
+map_Ns Tifa_Hair_Roughness.png
+map_d Tifa_Hair_BaseColor.png
+
+newmtl Tifa_Eyes
+Ns 900.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Eyes_BaseColor.png
+map_Ns Tifa_Eyes_Roughness.png
+
+newmtl Tifa_Eyes_Cornea
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.588000 0.588000 0.588000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.000000
+d 1.000000
+illum 1
+
+newmtl Tifa_Eyeshadow
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.000000 0.000000 0.000000
+Ks 0.000000 0.000000 0.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 1
+map_Kd eyeshadow.png
+map_d eyeshadow.png
+
+newmtl Tifa_Face
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.588000 0.588000 0.588000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Face_BaseColor.png
+map_Ns Tifa_Face_Roughness.png
+
+newmtl Tifa_Hair
+Ns 39.347122
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_d Tifa_Hair_BaseColor.png
+
+newmtl Tifa_HairPin
+Ns 85.983473
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Hair_BaseColor.png
+map_Ns Tifa_Hair_Roughness.png
+map_d Tifa_Hair_BaseColor.png
+
+newmtl Tifa_Legs
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Legs_BaseColor.png
+map_Ns Tifa_Legs_Roughness.png
+refl Tifa_Legs_Metallic.png
+
+newmtl Tifa_Materia
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Materia_BaseColor.png
+map_Ke Tifa_Materia_Emissive.png
+map_Ns Tifa_Materia_Roughness.png
+refl Tifa_Materia_Metallic.png
+
+newmtl Tifa_Skirt
+Ns 225.000000
+Ka 1.000000 1.000000 1.000000
+Kd 0.800000 0.800000 0.800000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Tifa_Skirt_BaseColor.png
+map_Ns Tifa_Skirt_Roughness.png
+refl Tifa_Skirt_Metallic.png
+
+newmtl Tifa_Tops
+Ns 18.000005
+Ka 1.000000 1.000000 1.000000
+Kd 0.615686 0.615686 0.615686
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 3
+map_Kd Tifa_Top_BaseColor.png
+map_Ns Tifa_Top_Roughness.png
+refl Tifa_Top_Metallic.png
