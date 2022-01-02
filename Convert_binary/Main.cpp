@@ -7,6 +7,7 @@
 #include <sys/timeb.h> 
 
 #define LINE_BUFFER ((size_t)(500))
+
 #define TEXTURE_FILE_PATH_SIZE ((size_t)(50))
 
 typedef struct vertex_attribute
@@ -30,16 +31,18 @@ typedef struct material_file
     float d = 0.0f;
     int illum = 1;
     char map_Kd[TEXTURE_FILE_PATH_SIZE] = { '\0' };
+    char map_Ks[TEXTURE_FILE_PATH_SIZE] = { '\0' };
     char map_d[TEXTURE_FILE_PATH_SIZE] = { '\0' };
     char map_Ns[TEXTURE_FILE_PATH_SIZE] = { '\0' };
     char refl[TEXTURE_FILE_PATH_SIZE] = { '\0' };
+
 }
 Material_File;
 
 typedef struct vertex
 {
     std::vector<VertexAttribute> attribute;
-    std::vector<unsigned int>  index;
+    //std::vector<unsigned int>  index;
     char materialName[TEXTURE_FILE_PATH_SIZE] = { '\0' };
     int shading;
 }
@@ -260,7 +263,7 @@ std::shared_ptr<std::vector<Vertex>> GetVertex(const char* path)
                 int num = atoi(number);
 
                 temp.shading = num;
-                //                printf("s %d\n", num);
+                printf("s %d\n", num);
             }
         }
 
@@ -403,7 +406,7 @@ std::shared_ptr<std::vector<Material_File>> GetMaterial(const char* path)
                 mtl.illum = illum;
                 //                printf("d %d\n", mtl.illum);
             }
-            else if (strncmp(line, "map_Kd", strlen("map_Kd")) == 0)    //拡散反射テクスチャ
+            else if (strncmp(line, "map_Kd", strlen("map_Kd")) == 0)    //拡散反射マップ
             {
                 char texture[LINE_BUFFER] = { '\0' };
                 fscanf_s(file, "%s", &texture, (unsigned int)LINE_BUFFER);
@@ -416,9 +419,9 @@ std::shared_ptr<std::vector<Material_File>> GetMaterial(const char* path)
 
                 memcpy(mtl.map_Kd, filePath, TEXTURE_FILE_PATH_SIZE);
 
-                 //               printf("mtl.map_Kd  %s\n", mtl.map_Kd);  
+                                printf("mtl.map_Kd  %s\n", mtl.map_Kd);  
             }
-            else if (strncmp(line, "map_Kd", strlen("map_Ks")) == 0)    //スペキュラーテクスチャ
+            else if (strncmp(line, "map_Ks", strlen("map_Ks")) == 0)    //鏡面反射マップ
             {
                 char texture[LINE_BUFFER] = { '\0' };
                 fscanf_s(file, "%s", &texture, (unsigned int)LINE_BUFFER);
@@ -429,9 +432,9 @@ std::shared_ptr<std::vector<Material_File>> GetMaterial(const char* path)
                 GetFolderPath(path, filePath, LINE_BUFFER);
                 strcat_s(filePath, texture);
 
-                memcpy(mtl.map_Kd, filePath, TEXTURE_FILE_PATH_SIZE);
+                memcpy(mtl.map_Ks, filePath, TEXTURE_FILE_PATH_SIZE);
 
-                //                printf("mtl.map_Ks  %s\n", mtl.map_Ks);  
+                                printf("mtl.map_Ks  %s\n", mtl.map_Ks);  
             }
             else if (strncmp(line, "map_d", strlen("map_d")) == 0)  //透過率マップ
             {
@@ -445,9 +448,9 @@ std::shared_ptr<std::vector<Material_File>> GetMaterial(const char* path)
 
                 memcpy(mtl.map_d, filePath, TEXTURE_FILE_PATH_SIZE);
 
-                //                printf("mtl.map_d  %s\n", mtl.map_d);
+                                printf("mtl.map_d  %s\n", mtl.map_d);
             }
-            else if (strncmp(line, "map_Ns", strlen("map_Ns")) == 0)  //スペキュラーマップ
+            else if (strncmp(line, "map_Ns", strlen("map_Ns")) == 0)  //鏡面反射角度マップ
             {
                 char texture[LINE_BUFFER] = { '\0' };
                 fscanf_s(file, "%s", &texture, (unsigned int)LINE_BUFFER);
@@ -459,9 +462,9 @@ std::shared_ptr<std::vector<Material_File>> GetMaterial(const char* path)
 
                 memcpy(mtl.map_Ns, filePath, TEXTURE_FILE_PATH_SIZE);
 
-                //                printf("mtl.map_Ns  %s\n", mtl.map_Ns);
+                                printf("mtl.map_Ns  %s\n", mtl.map_Ns);
             }
-            else if (strncmp(line, "map_Ns", strlen("refl")) == 0)  //球形反射マップ
+            else if (strncmp(line, "refl", strlen("refl")) == 0)  //球形反射マップ
             {
                 char texture[LINE_BUFFER] = { '\0' };
                 fscanf_s(file, "%s", &texture, (unsigned int)LINE_BUFFER);
@@ -473,7 +476,7 @@ std::shared_ptr<std::vector<Material_File>> GetMaterial(const char* path)
 
                 memcpy(mtl.refl, filePath, TEXTURE_FILE_PATH_SIZE);
 
-                //                printf("mtl.refl  %s\n", mtl.refl);
+                                printf("mtl.refl  %s\n", mtl.refl);
             }
 
 
@@ -502,11 +505,13 @@ int main()
     if (fopen_s(&file, "tifa.model", "wb") == 0)
     {  
         ftime(&start);
+        unsigned int objectNum = vertex->size();
+        fwrite(&objectNum, sizeof(unsigned int), 1, file); //オブジェクト数
 
         for (int i = 0; i < vertex->size(); i++)
         {
-            int size = vertex->at(i).attribute.size();
-            fwrite(&size, sizeof(unsigned int), 1, file); //頂点数
+            int vertedNum = vertex->at(i).attribute.size() + 1;
+            fwrite(&vertedNum, sizeof(unsigned int), 1, file); //頂点数
             for (std::vector<VertexAttribute>::const_iterator itr = vertex->at(i).attribute.begin(); itr != vertex->at(i).attribute.end(); itr++)
             {                      
                 fwrite(&itr->position, sizeof(float), 3, file);
@@ -514,32 +519,13 @@ int main()
                 fwrite(&itr->normal , sizeof(float), 3, file); 
             }
 
-            unsigned int si = material->size();
-            fwrite(&si, sizeof(unsigned int), 1, file);
+            fwrite(&vertex->at(i).shading, sizeof(unsigned int), 1, file);  //s 要素
 
             for (int j = 0; j < material->size(); j++)
             {
                 if (strcmp(vertex->at(i).materialName,material->at(j).materialName) == 0)
                 {
-                    /*                    
-                    float Ns = 0.0f;
-
-                    glm::vec3 Ka = glm::vec3(0, 0, 0);
-                    glm::vec3 Kd = glm::vec3(0, 0, 0);
-                    glm::vec3 Ks = glm::vec3(0, 0, 0);
-                    glm::vec3 Ke = glm::vec3(0, 0, 0);
-
-                    float Ni = 0.0f;
-                    float d = 0.0f;
-                    int illum = 1;
-
-                    char map_Kd[TEXTURE_FILE_PATH_SIZE] = { '\0' };
-                    char map_d[TEXTURE_FILE_PATH_SIZE] = { '\0' };
-                    char map_Ns[TEXTURE_FILE_PATH_SIZE] = { '\0' };
-                    char refl[TEXTURE_FILE_PATH_SIZE] = { '\0' };
-                    */
-
-
+                
                     fwrite(&material->at(j).Ns, sizeof(float), 1, file);
 
                     fwrite(&material->at(j).Ka, sizeof(float), 3, file);
@@ -552,6 +538,7 @@ int main()
                     fwrite(&material->at(j).illum, sizeof(int), 1, file);
 
                     fwrite(&material->at(j).map_Kd, sizeof(char), TEXTURE_FILE_PATH_SIZE, file);
+                    fwrite(&material->at(j).map_Ks, sizeof(char), TEXTURE_FILE_PATH_SIZE, file);
                     fwrite(&material->at(j).map_d, sizeof(char), TEXTURE_FILE_PATH_SIZE, file);
                     fwrite(&material->at(j).map_Ns, sizeof(char), TEXTURE_FILE_PATH_SIZE, file);
                     fwrite(&material->at(j).refl, sizeof(char), TEXTURE_FILE_PATH_SIZE, file);
